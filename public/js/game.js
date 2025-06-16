@@ -196,3 +196,11 @@ class Connect4 {
 
 // Start the game
 new Connect4();
+
+// Add footer to the game
+const footer = document.createElement('footer');
+footer.innerHTML = `
+    <p>This game is made by 
+        <a href="https://redwan-rahman.netlify.app/" target="_blank">Redwan Rahman</a>
+    </p>`;
+document.body.appendChild(footer);
