@@ -1,0 +1,8 @@
+[build]
+publish = "public"
+command = "echo 'Static site for Connect 4 Game'"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
