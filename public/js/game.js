@@ -49,12 +49,27 @@ class Connect4 {
         });
     }
 
-    makeMove(col) {
+    async updateCell(row, col) {
+        const cell = document.querySelector(
+            `.cell[data-row="${row}"][data-col="${col}"]`
+        );
+        cell.className = `cell ${this.currentPlayer === PLAYER ? 'player' : 'ai'} dropping`;
+        
+        // Wait for animation to complete
+        return new Promise(resolve => {
+            cell.addEventListener('animationend', () => {
+                cell.classList.remove('dropping');
+                resolve();
+            }, { once: true });
+        });
+    }
+
+    async makeMove(col) {
         const row = this.getLowestEmptyRow(col);
         if (row === -1) return;
 
         this.board[row][col] = this.currentPlayer;
-        this.updateCell(row, col);
+        await this.updateCell(row, col);
 
         const winningCells = this.checkWin(row, col);
         if (winningCells) {
@@ -158,13 +173,6 @@ class Connect4 {
         }
 
         return null;
-    }
-
-    updateCell(row, col) {
-        const cell = document.querySelector(
-            `.cell[data-row="${row}"][data-col="${col}"]`
-        );
-        cell.className = `cell ${this.currentPlayer === PLAYER ? 'player' : 'ai'}`;
     }
 
     highlightWinningCells(cells) {

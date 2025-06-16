@@ -117,6 +117,19 @@ footer a:hover {
     text-decoration: underline;
 }
 
+@keyframes dropCoin {
+    from {
+        transform: translateY(-500%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.cell.dropping {
+    animation: dropCoin 0.5s ease-in;
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 2em;
